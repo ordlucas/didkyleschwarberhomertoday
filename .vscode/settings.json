@@ -1,0 +1,6 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/0096bac1-d854-4545-8012-27da51548a92/resourceGroups/lob5298_rg_Linux_centralus/providers/Microsoft.Web/sites/didkyleschwarberhomertoday"
+}

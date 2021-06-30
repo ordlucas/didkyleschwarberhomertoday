@@ -1,9 +1,32 @@
 <!doctype html>
-<title>Did Kyle Schwarber Homer Today?</title>
-{% if homer == 1 %}
-<h1>Yes, Kyle Schwarber homered today.</h1>
-{% elif homer == 0 %}
-<h1>No, Kyle Schwarber hasn't homered today. (yet)</h1>
-{% else %}
-<h1>Kyle Schwarber hasn't played today.</h1>
-{% endif %}
+<html>
+    <head>
+        <title>Did Kyle Schwarber Homer Today?</title>
+        <script src={{ url_for("static", filename="time.js")}} type="text/javascript"></script>
+        <style>
+            body {
+                text-align: center;
+                font-family: Roboto, Arial, sans-serif;
+            }
+            h1 {
+                font-size: 50px;
+            }
+            p {
+                font-size: x-large
+            }
+        </style>
+    </head>
+    <body onload="getTime()">
+        {% if homer == 1 %}
+            <h1>YES.</h1>
+            <p>Kyle Schwarber homered today against the {{ opposing_team }} at {{ timestamp }}.</p>
+        {% elif homer == 0 %}
+            <h1>NO.</h1>
+            <p>Kyle Schwarber hasn't homered today. The Nationals are playing the {{ opposing_team }} today.</p>
+        {% else %}
+            <h1>NOT TODAY.</h1>
+            <p>The Nationals aren't playing today, so Kyle Schwarber cannot homer today.</p>
+        {% endif %}
+        </p>
+    </body>
+</html>

@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # check if he homered
-    homer = check_homer()
+    tz_cookie = request.cookies.get("tzOffset")
+
+    homer = check_homer(int(tz_cookie))
 
     # localize timestamp w/ client timezone
     timestamp = datetime.strptime(homer[2], "%Y-%m-%dT%H:%M:%S.%fZ")
-    tz_cookie = request.cookies.get("tzOffset")
     timestamp = pytz.utc.localize(timestamp)
     time_string = timestamp.astimezone(timezone(timedelta(minutes=-int(tz_cookie)))).strftime("%I:%M %p")
     

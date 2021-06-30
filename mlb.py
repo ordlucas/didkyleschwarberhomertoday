@@ -1,12 +1,12 @@
 import mlbgame
 import json
-from datetime import date
+from datetime import datetime, timezone, timedelta
 
 TEAM = "Nationals"
 PLAYER_ID = 656941
 
-def check_homer() -> int:
-    today = date.today()
+def check_homer(timezone_offset) -> int:
+    today = datetime.now().astimezone(timezone(timedelta(minutes=-timezone_offset)))
 
     # break down game(s) played into at bats. list comprehensions are very helpful here
     games = [game for game in mlbgame.day(today.year, today.month, today.day, home=TEAM, away=TEAM)]
@@ -23,10 +23,10 @@ def check_homer() -> int:
                 return (1, games[0].home_team, at_bat[0].end_tfs_zulu)
             else:
                 return (1, games[0].away_team, at_bat[0].end_tfs_zulu)
-    if at_bats[0][0] != "bot":
+    if len(at_bats) > 0 and at_bats[0][0] != "bot":
         return (0, games[0].home_team, None)
     else:
         return(0, games[0].away_team, None)
 
 if __name__ == "__main__":
-    check_homer()
+    check_homer(0)
